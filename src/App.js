@@ -19,7 +19,9 @@ export function App() {
     let countdown = setInterval(function () {
       seconds--;
       time.innerText = seconds;
-      if (seconds <= 0) clearInterval(countdown);
+      if (seconds === 0) {
+        clearInterval(countdown), alert("Time is over");
+      }
     }, 1000);
   };
 
