@@ -1,5 +1,5 @@
 import "./app.css";
-import { addMinutesToSeconds, convertMinutesToSeconds } from "./converter";
+import { addTime } from "./converter";
 
 export function App() {
   const app = document.createElement("div");
@@ -20,6 +20,11 @@ export function App() {
   insertMinutes.id = "insert-minutes";
   insertMinutes.className = "number";
   insertMinutes.placeholder = "m";
+  const insertHours = document.createElement("input");
+  insertHours.type = "number";
+  insertHours.id = "insert-hours";
+  insertHours.className = "number";
+  insertHours.placeholder = "h";
 
   const time = document.createElement("p");
   time.id = "countdown";
@@ -27,18 +32,20 @@ export function App() {
   btn.className = "startButton";
   btn.innerHTML = "Start the Countdown";
   btn.onclick = function startTimer() {
-    let minutes = insertMinutes.value * 60;
-    let seconds = insertSeconds.value;
-    let timeAdded = addMinutesToSeconds(minutes, seconds);
+    let seconds = addTime(
+      Number(insertHours.value),
+      Number(insertMinutes.value),
+      Number(insertSeconds.value)
+    );
     const countdown = setInterval(function () {
-      timeAdded--;
-      time.innerText = timeAdded;
+      seconds--;
+      time.innerText = seconds;
       if (time === 0) {
         clearInterval(countdown);
       }
     }, 1000);
   };
-  form.append(insertMinutes, insertSeconds, btn);
+  form.append(insertHours, insertMinutes, insertSeconds, btn);
   app.append(form, time);
 
   return app;
