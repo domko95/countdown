@@ -31,6 +31,15 @@ export function App() {
   btn.className = "startButton";
   btn.innerHTML = "Start the Countdown";
   btn.onclick = function startTimer() {
+    if (insertSeconds.value >= 60) {
+      insertSeconds.value = 60;
+    }
+    if (insertMinutes.value >= 60) {
+      insertMinutes.value = 60;
+    }
+    if (insertHours.value >= 24) {
+      insertHours.value = 24;
+    }
     let seconds =
       Number(insertHours.value) * 3600 +
       Number(insertMinutes.value) * 60 +
@@ -38,7 +47,7 @@ export function App() {
     const countdown = setInterval(function () {
       seconds--;
       time.innerText = seconds;
-      if (time === 0) {
+      if (seconds === 0) {
         clearInterval(countdown);
       }
     }, 1000);
