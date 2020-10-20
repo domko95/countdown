@@ -1,5 +1,4 @@
 import "./app.css";
-import { addTime } from "./converter";
 
 export function App() {
   const app = document.createElement("div");
@@ -32,11 +31,10 @@ export function App() {
   btn.className = "startButton";
   btn.innerHTML = "Start the Countdown";
   btn.onclick = function startTimer() {
-    let seconds = addTime(
-      Number(insertHours.value),
-      Number(insertMinutes.value),
-      Number(insertSeconds.value)
-    );
+    let seconds =
+      Number(insertHours.value) * 3600 +
+      Number(insertMinutes.value) * 60 +
+      Number(insertSeconds.value);
     const countdown = setInterval(function () {
       seconds--;
       time.innerText = seconds;
